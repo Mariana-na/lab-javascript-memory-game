@@ -44,8 +44,51 @@ window.addEventListener('load', (event) => {
   // Bind the click event of each element to a function
   document.querySelectorAll('.card').forEach((card) => {
     card.addEventListener('click', () => {
-      // TODO: write some code here
+
+    card.classList.add("turned");
+
       console.log(`Card clicked: ${card}`);
+
+      memoryGame.pickedCards.push(card);
+
+if (memoryGame.pickedCards.length === 2){
+  memoryGame.pairsClicked += 1;
+  if (memoryGame.checkIfFinished()){
+    document.querySelector("#memory-board").innerHTML = "";
+  }
+
+  if (checkIfPair(memoryGame.pickedCards[0], memoryGame.pickedCards[1])){
+
+    console.log("That's a pair!");
+
+  } else {
+    card.classList.remove("turned");
+  }
+}
+    
     });
   });
 });
+
+/*
+memoryGame.pickedCards.push(card);
+
+if (memoryGame.pickedCards.length === 2){
+  memoryGame.pairsClicked += 1;
+  if (memoryGame.checkIfFinished()){
+    document.querySelector("#memory-board").innerHTML = "";
+  }
+
+  if (checkIfPair(memoryGame.pickedCards[0], memoryGame.pickedCards[1])){
+
+    console.log("That's a pair!");
+
+  } else {
+    card.classList.remove("turned");
+  }
+}
+*/
+
+// 2 conditions. 1st- check if its 2 cards . if yes, 2nd check + pairsClicked count ++. if no, do nothing.
+//2nd- check if its pair.  not pair, remove.turned. pair - counts++ pairsGuessed 
+// if total cards/2 === pairs counter - game finished
